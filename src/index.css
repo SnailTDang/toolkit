@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap");
+
+@layer base {
+    body {
+        font-family: "Saira Semi Condensed", system-ui, sans-serif !important;
+    }
+    p,
+    span,
+    strong {
+        font-family: "Noto Sans", sans-serif;
+    }
+}
+html {
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-image: linear-gradient(45deg, #cd93b0, #5fbef6);
+}
+
+::-webkit-scrollbar-track {
+    background: #e8e8e8;
+}
+
+.wrapper {
+    background-color: #0f1d2f;
+    max-width: 1920px;
+}
+
+.active-button-film {
+    background-color: #ff5400;
+    color: #ffff;
+}
+
+.backdrop {
+    background: #95959536;
+    /* backdrop-filter: blur(10px); */
+}
+
+.backdrop-info {
+    background: rgba(65, 51, 51, 0.351);
+    /* backdrop-filter: blur(10px); */
+}
+
+.backdrop-ticket {
+    background: #eadfd117;
+    /* backdrop-filter: blur(10px); */
+}
+
+.backdrop-detail {
+    background: #3e2f1ca6;
+    /* backdrop-filter: blur(4px); */
+}
+
+.bg-btn-home {
+    position: relative;
+}
+.bg-btn-home::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    /* transform: translate(-50%, -50%); */
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    border: 2px solid #fff;
+}
+
+.user-submenu::after {
+    position: absolute;
+    content: "";
+    top: -10px;
+    right: 50%;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #ff8447;
+}
+
+.user-submenu::before {
+    position: absolute;
+    content: "";
+    top: -10px;
+    right: 0;
+    width: 100%;
+    height: 10px;
+}

@@ -1,0 +1,44 @@
+.screen-thumb {
+    filter: drop-shadow(-3px 57px 40px rgb(255, 255, 255));
+    /* -webkit-filter: drop-shadow(-3px 57px 67px rgb(255, 255, 255));
+    -moz-filter: drop-shadow(-3px 57px 67px rgb(255, 255, 255)); */
+}
+
+.seat {
+    margin: 3px;
+    width: 35px;
+    height: 35px;
+}
+
+.seat-normal {
+    cursor: pointer !important;
+    background: url("http://starlight.vn/content/img/seat-standard.png") !important;
+    background-size: contain !important;
+}
+
+.seat-booked {
+    cursor: not-allowed !important;
+    background: url("http://starlight.vn/content/img/seat.png") !important;
+    background-size: contain !important;
+}
+
+.seat-booking {
+    cursor: pointer !important;
+    background: url("http://starlight.vn/content/img/seat-selected.png") !important;
+    background-size: contain !important;
+}
+
+.seat-vip {
+    cursor: pointer !important;
+    background: url("http://starlight.vn/content/img/seat-vip.png") !important;
+    background-size: contain !important;
+}
+
+.your-seat {
+    cursor: not-allowed !important;
+    background: url("http://starlight.vn/content/img/seat-sw.png") !important;
+    filter: hue-rotate(63deg) saturate(200%);
+    -webkit-filter: hue-rotate(63deg) saturate(200%);
+    -moz-filter: hue-rotate(63deg) saturate(200%);
+    background-size: contain !important;
+}
