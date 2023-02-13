@@ -19,7 +19,7 @@ export default function LoginForm(props) {
         pass: false,
     })
 
-    const { loginfail } = useSelector(state => state.userLoginReducer)
+    const { loginfail } = useSelector(state => state.userReducer)
 
     const dispatch = useDispatch()
 

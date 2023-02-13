@@ -12,6 +12,7 @@ import ShowtimesTemplate from './templates/ShowtimesTemplate/ShowtimesTemplate';
 import NewsTemplate from './templates/NewsTemplate/NewsTemplate';
 import CheckoutTemplate from './templates/CheckoutTemplate/CheckoutTemplate'
 import HistoryBookingTemplate from './templates/HistoryBookingTemplate/HistoryBookingTemplate';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 // import ContactTemplate from './templates/HistoryBookingTemplate/HistoryBookingTemplate';
 
 // import Home from './views/Home/Home';
@@ -20,7 +21,6 @@ import HistoryBookingTemplate from './templates/HistoryBookingTemplate/HistoryBo
 // import DeitailMovies from './views/Detail/DeitailMovies';
 // import Login from './views/Login/Login';
 // import Register from './views/Register/Register'
-// import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 // import Checkout from './views/Checkout/Checkout';
 // import Showtimes from './views/Showtimes/Showtimes';
 // import About from './views/About/About';
@@ -34,20 +34,20 @@ function App() {
   return (
     <div className="wrapper m-auto overflow-hidden">
       {/* <HomeTemplate /> */}
+      <ScrollToTop />
       <Routes >
-        {/* <ScrollToTop /> */}
         {/* <Switch> */}
-        <Route exact="true" path='/' element={<HomeTemplate />} />
-        <Route exact="true" path='/home' element={<HomeTemplate />} />
-        <Route exact="true" path='/showtimes' element={<ShowtimesTemplate />} />
-        <Route exact="true" path='/contact' element={<ContactTemplate />} />
-        <Route exact="true" path='/news' element={<NewsTemplate />} />
-        <Route exact="true" path='/login' element={<LoginTemplate />} />
-        <Route exact="true" path='/register' element={<SignUpTemplate />} />
-        <Route exact="true" path='/movie/:id' element={<DetailTemplate />} />
-        <Route exact="true" path='/about' element={<AboutTemplate />} />
-        <Route exact="true" path='/history-booking' element={<HistoryBookingTemplate />} />
-        <Route exact="true" path='/checkout/:id' element={<CheckoutTemplate />} />
+        <Route exact path='/' element={<HomeTemplate />} />
+        <Route exact path='/home' element={<HomeTemplate />} />
+        <Route exact path='/showtimes' element={<ShowtimesTemplate />} />
+        <Route exact path='/contact' element={<ContactTemplate />} />
+        <Route exact path='/news' element={<NewsTemplate />} />
+        <Route exact path='/login' element={<LoginTemplate />} />
+        <Route exact path='/register' element={<SignUpTemplate />} />
+        <Route exact path='/movie/:id' element={<DetailTemplate />} />
+        <Route exact path='/about' element={<AboutTemplate />} />
+        <Route exact path='/history-booking' element={<HistoryBookingTemplate />} />
+        <Route exact path='/checkout/:id' element={<CheckoutTemplate />} />
         {/* </Switch> */}
       </Routes>
     </div>

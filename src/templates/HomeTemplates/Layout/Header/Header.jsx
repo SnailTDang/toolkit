@@ -50,20 +50,20 @@ export default function Header(props) {
                         </a>
                         <ul className="items-stretch space-x-3 flex mb-0 ml-20 lg:ml-64">
                             <li className="flex">
-                                <NavLink to="/" exact
+                                <NavLink to="/home" exact="true"
                                     className={isActive => isActiveMenu(isActive)}
                                 >HOME</NavLink>
                             </li>
                             <li className="flex">
-                                <NavLink exact to="/showtimes" className={isActive => isActiveMenu(isActive)}>SHOWTIMES</NavLink>
+                                <NavLink exact="true" to="/showtimes" className={isActive => isActiveMenu(isActive)}>SHOWTIMES</NavLink>
                             </li>
                             <li className="flex">
-                                <NavLink to="/news" exact
+                                <NavLink to="/news" exact="true"
                                     className={isActive => isActiveMenu(isActive)}
                                 >PROMOTIONS</NavLink>
                             </li>
                             <li className="flex">
-                                <NavLink to="/contact" exact
+                                <NavLink to="/contact" exact="true"
                                     className={isActive => isActiveMenu(isActive)}
                                 >CONTACT</NavLink>
                             </li>

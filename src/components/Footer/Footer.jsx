@@ -1,6 +1,7 @@
 import { Col, Row } from 'antd'
 import React, { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { ADDRESS_LOCATION } from '../../constants/baseSettings/settings'
 import Googlemap from '../Googlemap/Googlemap'
 import "./footer.css"
 
@@ -61,7 +62,7 @@ export default function Footer() {
                         </div>
                     </Col>
                 </Row>
-                <Googlemap height={height} />
+                <Googlemap height={height} border={0} link={ADDRESS_LOCATION}/>
                 <Row className="row company-info">
                     <Col lg={18} className="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                         <h1 className='text-white text-lg'>Tên Doanh Nghiệp: Công Ty TNHH VISION TECHNOLOGY.</h1>
