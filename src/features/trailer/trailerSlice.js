@@ -30,11 +30,19 @@ export const trailerSlice = createSlice({
             .addCase(showTrailer.rejected, (state, action) => {
                 // state.loading = false
                 state.userInfo = action.payload
+                state.isOpen = false
                 // state.error = action.error.message
             })
             // 
+            .addCase(hideTrailer.pending, (state, action) => {
+                state.isOpen = true
+            })
             .addCase(hideTrailer.fulfilled, (state, action) => {
                 state.isOpen = false
+                state.trailerMovie = action.payload
+            })
+            .addCase(hideTrailer.rejected, (state, action) => {
+                state.isOpen = true
             })
     }
 })

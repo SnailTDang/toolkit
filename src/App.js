@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, Navigate } from 'react-router-dom'
 // import { createBrowserHistory } from 'history'
 
 import { HomeTemplate } from './templates/HomeTemplates/HomeTemplate';
@@ -25,8 +25,10 @@ import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 // import Showtimes from './views/Showtimes/Showtimes';
 // import About from './views/About/About';
 // import HistoryBooking from './views/HistoryBooking/HistoryBooking';
-
+import { USER_LOGIN } from './constants/baseSettings/settings';
 import './App.css';
+
+const isLogin = localStorage.getItem(USER_LOGIN)
 
 // export const history = createBrowserHistory()
 
@@ -47,7 +49,7 @@ function App() {
         <Route exact path='/movie/:id' element={<DetailTemplate />} />
         <Route exact path='/about' element={<AboutTemplate />} />
         <Route exact path='/history-booking' element={<HistoryBookingTemplate />} />
-        <Route exact path='/checkout/:id' element={<CheckoutTemplate />} />
+        <Route exact path='/checkout/:id' element={isLogin ? <CheckoutTemplate /> : <Navigate to='/' />} />
         {/* </Switch> */}
       </Routes>
     </div>

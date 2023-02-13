@@ -49,7 +49,7 @@ const renderCinemeList = (list) => {
                                                 <div className="grid xs:grid-cols-2 grid-cols-1 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-3">
                                                     {movies.lstLichChieuTheoPhim?.slice(0, 10).map((shTimes, index) => {
                                                         return (
-                                                            <Link to={`/checkout/${shTimes.maLichChieu}`} key={index} className='text-lg font-bold p-2 bg-btn-home text-white'>
+                                                            <Link exact to={`/checkout/${shTimes.maLichChieu}`} key={index} className='text-lg font-bold p-2 bg-btn-home text-white'>
                                                                 {moment(shTimes.ngayChieuGioChieu).format('hh:mm A')}
                                                             </Link>
                                                         )

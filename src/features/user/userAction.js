@@ -5,8 +5,9 @@ export const userLoginAction = createAsyncThunk(
     'userLogin',
     async (params, { rejectWithValue }) => {
         try {
-            const response = await userServices.getTicketCinema(params)
-            return response.data.result
+            const response = await userServices.postUserLogin(params)
+            console.log(response)
+            return response.data
         } catch (err) {
             return rejectWithValue(err.data)
         }

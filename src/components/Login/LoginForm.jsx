@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { userLoginAction } from '../../features/user/userAction';
-
 import "./loginform.css"
 import { useDispatch, useSelector } from 'react-redux';
 // import { history } from '../../App';
 import { Col, Row } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -18,7 +18,7 @@ export default function LoginForm(props) {
         account: false,
         pass: false,
     })
-
+    const navigate = useNavigate();
     const { loginfail } = useSelector(state => state.userReducer)
 
     const dispatch = useDispatch()
@@ -42,8 +42,10 @@ export default function LoginForm(props) {
                 taiKhoan: values.account,
                 matKhau: values.pass
             }
-            const action = userLoginAction(user)
-            dispatch(action)
+            dispatch(userLoginAction(user))
+            .then(()=> {
+                navigate(-1)
+            })
         },
     });
 

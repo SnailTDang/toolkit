@@ -1,8 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getTicketRoom } from './ticketRoomAction'
+import { getTicketRoom, bookTicketAction } from './ticketRoomAction'
 
 const initialState = {
-    ticketRoom: []
+    ticketRoom: [],
+    selectingSeats: [],
+    tabDefault: "1"
 }
 
 export const ticketRoomSlice = createSlice({
@@ -27,6 +29,10 @@ export const ticketRoomSlice = createSlice({
                 // state.loading = false
                 state.ticketRoom = []
                 // state.error = action.error.message
+            })
+            // 
+            .addCase(bookTicketAction.pending, (state) => {
+
             })
     }
 })

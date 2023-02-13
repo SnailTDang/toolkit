@@ -1,16 +1,18 @@
-import { Route, redirect } from "react-router-dom";
+import { Route, redirect, useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import Header from "../HomeTemplates/Layout/Header/Header";
 import { USER_LOGIN } from "../../constants/baseSettings/settings";
 import Checkout from "../../views/Checkout/Checkout";
-
+import { useEffect } from "react";
 
 
 
 const CheckoutTemplate = (props) => {
-    if (!localStorage.getItem(USER_LOGIN)) {
-        redirect('/login')
-    }
+    // let navigate = useNavigate()
+    // if (!localStorage.getItem(USER_LOGIN)) {
+    //     console.log(localStorage.getItem(USER_LOGIN))
+    //     navigate('/login')
+    // }
     // const { Component, ...restProps } = props;
     return <>
         {/* <Prompt

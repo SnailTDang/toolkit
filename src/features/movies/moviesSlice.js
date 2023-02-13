@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { getListMovies } from './moviesAction'
+import { getListMovies, getDetailMovie } from './moviesAction'
 
 const initialState = {
     listMovies: {
@@ -8,7 +8,8 @@ const initialState = {
         arrayMovieDefault: [],
         coming: null,
         showing: null,
-    }
+    },
+    detailMovie: {}
 }
 
 export const listMoviesSlice = createSlice({
@@ -17,6 +18,9 @@ export const listMoviesSlice = createSlice({
     reducers: {
         initiallistMovies: (state) => {
             state.listMovies = {}
+        },
+        initialDetailMovie: (state) => {
+            state.detailMovie = {}
         }
     },
     extraReducers: (builder) => {
@@ -35,6 +39,22 @@ export const listMoviesSlice = createSlice({
             .addCase(getListMovies.rejected, (state, action) => {
                 // state.loading = false
                 state.listMovies.arrayMovie = []
+                // state.error = action.error.message
+            })
+            //
+            .addCase(getDetailMovie.pending, (state, action) => {
+                // state.loading = false
+                state.detailMovie = []
+                // state.error = action.error.message
+            })
+            .addCase(getDetailMovie.fulfilled, (state, action) => {
+                // state.loading = false
+                state.detailMovie = action.payload
+                // state.error = action.error.message
+            })
+            .addCase(getDetailMovie.rejected, (state, action) => {
+                // state.loading = false
+                state.detailMovie = []
                 // state.error = action.error.message
             })
     }

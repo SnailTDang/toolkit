@@ -9,22 +9,22 @@ import "./bookticket.css"
 import { TicketInfo } from '../../../core/models/BookTicketsInfo';
 import { USER_LOGIN } from '../../../constants/baseSettings/settings';
 import { getTicketsUserLogin } from '../../../features/user/userAction';
+import { useParams } from 'react-router';
 
 
 
 
 export default function ChecoutTickets(props) {
-    const { userLogin } = useSelector(state => state.UserLoginReducer)
-    const { roomTickets, selectingSeats } = useSelector(state => state.TicketsRoomReducer)
+    const { userLogin } = useSelector(state => state.userReducer)
+    const { id, userInfo } = props
+    const { ticketRoom, selectingSeats } = useSelector(state => state.ticketsRoomReducer)
     const dispatch = useDispatch()
-    const { thongTinPhim, danhSachGhe } = roomTickets
+    const { thongTinPhim, danhSachGhe } = ticketRoom
 
 
     useEffect(() => {
-        const id = props.match.params.id
-        const action = getTicketRoom(id)
-        dispatch(action)
-        dispatch(getTicketsUserLogin({ taiKhoan: userLogin.taiKhoan }))
+        dispatch(getTicketRoom(id))
+        dispatch(getTicketsUserLogin({ taiKhoan: userInfo.taiKhoan }))
     }, [])
     // console.log(danhSachGhe)
 

@@ -2,8 +2,10 @@ import { createSlice } from '@reduxjs/toolkit'
 import { userLoginAction, userSingin } from './userAction'
 import { USER_LOGIN, TOKEN_CYBER } from '../../constants/baseSettings/settings'
 
+let isLogin = localStorage.getItem(USER_LOGIN)
+
 const initialState = {
-    userLogin: localStorage.getItem(USER_LOGIN) ? JSON.parse(localStorage.getItem(USER_LOGIN)) : {},
+    userLogin: isLogin ? JSON.parse(localStorage.getItem(USER_LOGIN)) : {},
     userInfo: {},
     loginfail: '',
     signinfail: '',
@@ -25,19 +27,21 @@ export const userSlice = createSlice({
             })
             .addCase(userLoginAction.fulfilled, (state, action) => {
                 // state.loading = false
-                state.userLogin = action.value
+                console.log(action)
+                state.userLogin = action.payload
                 state.loginfail = ""
-                localStorage.setItem(USER_LOGIN, JSON.stringify(action.value))
-                localStorage.setItem(TOKEN_CYBER, JSON.stringify(action.value.accessToken))
+                localStorage.setItem(USER_LOGIN, JSON.stringify(action.payload))
+                localStorage.setItem(TOKEN_CYBER, JSON.stringify(action.payload.accessToken))
+
             })
             .addCase(userLoginAction.rejected, (state, action) => {
                 // state.loading = false
-                state.userInfo = action.value
+                state.userInfo = action.payload
                 // state.error = action.error.message
             })
             // 
             .addCase(userSingin.rejected, (state, action) => {
-                state.signinfail = action.value
+                state.signinfail = action.payload
             })
     }
 })

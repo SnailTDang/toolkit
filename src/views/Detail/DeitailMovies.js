@@ -2,22 +2,24 @@ import React, { useEffect } from 'react'
 import { Row, Col, Tabs } from 'antd';
 import "./detail.css"
 import { useDispatch, useSelector } from 'react-redux';
-import { getShowTimes } from '../../features/showTimes/showTimesAction';
+// import { getShowTimes } from '../../features/showTimes/showTimesAction';
+import { getDetailMovie } from '../../features/movies/moviesAction';
 import moment from 'moment';
 import { NavLink } from 'react-router-dom';
 import { showTrailer } from '../../features/trailer/trailerActions';
+import PopupTrailer from '../../components/PopupTrailer/PopupTrailer';
 
 const { TabPane } = Tabs;
 
 
 export default function DeitailMovies(props) {
-    const { showTimeMovie } = useSelector(state => state.ShowtimesReducer)
-    let { danhGia, heThongRapChieu, hinhAnh, moTa, ngayKhoiChieu, tenPhim, trailer } = showTimeMovie
+    const { detailMovie } = useSelector(state => state.moviesReducer)
+    let { danhGia, heThongRapChieu, hinhAnh, moTa, ngayKhoiChieu, tenPhim, trailer } = detailMovie
     const dispatch = useDispatch()
-
+    // console.log(props.match.params.id)
     useEffect(() => {
-        let id = props.match.params.id;
-        dispatch(getShowTimes(id))
+        let id = props.idMovie;
+        dispatch(getDetailMovie(id))
     }, [])
 
     return (
@@ -54,7 +56,7 @@ export default function DeitailMovies(props) {
                                     <div className="trailer">
                                         <button className="inline-flex items-center py-2 px-3 text-base font-medium text-center text-white rounded-lg border-orange-600 border-2 bg-orange-500 text-white"
                                             onClick={() => {
-                                                dispatch(showTrailer(showTimeMovie))
+                                                dispatch(showTrailer(detailMovie))
                                             }}
                                         >
                                             TRAILER
@@ -83,7 +85,7 @@ export default function DeitailMovies(props) {
                             {heThongRapChieu?.map((cinemas, index) => {
                                 return (
                                     <TabPane tab={
-                                        <img src={cinemas.logo} className='w-20' />
+                                        <img src={cinemas.logo} className='w-20' alt='null' />
                                     } key={index}>
                                         {cinemas.cumRapChieu.map((cinema, index) => {
                                             return (
@@ -114,6 +116,7 @@ export default function DeitailMovies(props) {
                     </Row>
                 </div>
             </div>
+            <PopupTrailer />
         </div >
     )
 }
