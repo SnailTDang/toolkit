@@ -1,5 +1,6 @@
 .ant-tabs-nav-wrap {
     /* justify-content: flex-start; */
+    justify-content: center;
     padding: 15px 0;
     /* height: 140px; */
 }

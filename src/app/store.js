@@ -7,6 +7,7 @@ import showTimesReducer from '../features/showTimes/showTimesSlice';
 import moviesReducer from '../features/movies/moviesSlice';
 import userReducer from '../features/user/userSlice';
 import trailerReducer from '../features/trailer/trailerSlice';
+import loadingReducer from '../features/loading/loadingSlice';
 
 export const store = configureStore({
   reducer: {
@@ -16,7 +17,8 @@ export const store = configureStore({
     ticketsRoomReducer,
     moviesReducer,
     userReducer,
-    trailerReducer
+    trailerReducer,
+    loadingReducer
     // counter: counterReducer,
   },
 });

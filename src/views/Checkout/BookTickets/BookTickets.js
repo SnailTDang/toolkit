@@ -4,33 +4,45 @@ import moment from 'moment'
 import _ from 'lodash'
 import { NavLink } from 'react-router-dom'
 import { getListMovies } from '../../../features/movies/moviesAction'
+import { checkLogin } from '../../../App'
+import { getTicketsUserLogin } from '../../../features/user/userAction'
 // import { history } from '../../../App'
 
 
 
 export default function BookTickets(props) {
-    const { moviesList } = useSelector(state => state.ListMoviesReducer);
+    // console.log(props)
+    const ticketList = props.userInfo.thongTinDatVe
+    // const isLogin = checkLogin()
+    // const { moviesList } = useSelector(state => state.ListMoviesReducer);
+    const { listMovies } = useSelector(state => state.moviesReducer);
     const dispatch = useDispatch()
     useEffect(() => {
+        // if (isLogin) {
+        //     console.log(isLogin)
+        //     dispatch(getTicketsUserLogin(JSON.parse(isLogin)))
+        // }
         dispatch(getListMovies('GP03'))
     }, [])
     const getIdMovie = (name) => {
         let idFilm = ""
-        let film = moviesList.arrayMovie.find(item => {
+        // console.log(listMovies)
+        let film = listMovies.arrayMovie.find(item => {
             return item.tenPhim === name
         });
         if (film) {
+            // console.log(film)
             idFilm = `/movie/${film.maPhim}`
         } else {
+            // console.log(film)
             idFilm = `/history-booking`
         }
         return idFilm;
     }
-    const renderTicketBooking = () => {
-        // console.log(props)
-        if (props.userInfo.thongTinDatVe?.length) {
-            // console.log(props.userInfo)
-            return props.userInfo.thongTinDatVe?.map((ticket, index) => {
+    const renderTicketBooking = (ticketList) => {
+        let arrayTickets = [...ticketList].reverse()
+        if (arrayTickets.length) {
+            return arrayTickets.map((ticket, index) => {
                 // getIdMovie(ticket.tenPhim)
                 let cost = ticket.giaVe * ticket.danhSachGhe.length
                 return (
@@ -88,7 +100,7 @@ export default function BookTickets(props) {
             <section className="container text-gray-400 body-font">
                 <div className="py-5 mx-auto min-h-20vh">
                     <div className="flex flex-row flex-wrap -m-2">
-                        {renderTicketBooking()}
+                        {renderTicketBooking(ticketList)}
                     </div>
                 </div>
             </section>

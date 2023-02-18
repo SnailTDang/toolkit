@@ -7,6 +7,7 @@ export const getTicketRoom = createAsyncThunk(
     async (params, { rejectWithValue }) => {
         try {
             const response = await ticketsServices.getTicketCinema(params)
+            // console.log(response.data)
             return response.data
         } catch (err) {
             return rejectWithValue(err.data)
@@ -21,7 +22,8 @@ export const bookTicketAction = createAsyncThunk(
             const response = await ticketsServices.postTicketMovie(params)
             return response.data
         } catch (err) {
-            return rejectWithValue(err.data)
+            // console.log(err)
+            return rejectWithValue(err.response)
         }
     }
 )

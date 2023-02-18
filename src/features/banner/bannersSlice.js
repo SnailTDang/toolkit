@@ -23,7 +23,7 @@ export const bannersSlice = createSlice({
             .addCase(getBanners.fulfilled, (state, action) => {
                 // state.loading = false
                 // console.log(action.payload)
-                console.log(state.bannersList)
+                // console.log(state.bannersList)
                 state.bannersList = action.payload
             })
             .addCase(getBanners.rejected, (state, action) => {

@@ -6,6 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
 import "antd/dist/antd.css";
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import './index.css';
 
 const container = document.getElementById('root');

@@ -8,11 +8,14 @@ import { useEffect } from "react";
 
 
 const CheckoutTemplate = (props) => {
-    // let navigate = useNavigate()
-    // if (!localStorage.getItem(USER_LOGIN)) {
-    //     console.log(localStorage.getItem(USER_LOGIN))
-    //     navigate('/login')
-    // }
+    let navigate = useNavigate()
+
+    useEffect(() => {
+        if (!localStorage.getItem(USER_LOGIN)) {
+            console.log(localStorage.getItem(USER_LOGIN))
+            navigate('/login')
+        }
+    }, [navigate])
     // const { Component, ...restProps } = props;
     return <>
         {/* <Prompt

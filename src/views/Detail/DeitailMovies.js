@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { getShowTimes } from '../../features/showTimes/showTimesAction';
 import { getDetailMovie } from '../../features/movies/moviesAction';
 import moment from 'moment';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { showTrailer } from '../../features/trailer/trailerActions';
 import PopupTrailer from '../../components/PopupTrailer/PopupTrailer';
 
@@ -13,12 +13,13 @@ const { TabPane } = Tabs;
 
 
 export default function DeitailMovies(props) {
+    const { id } = useParams()
     const { detailMovie } = useSelector(state => state.moviesReducer)
     let { danhGia, heThongRapChieu, hinhAnh, moTa, ngayKhoiChieu, tenPhim, trailer } = detailMovie
     const dispatch = useDispatch()
     // console.log(props.match.params.id)
     useEffect(() => {
-        let id = props.idMovie;
+        // let id = props.idMovie;
         dispatch(getDetailMovie(id))
     }, [])
 

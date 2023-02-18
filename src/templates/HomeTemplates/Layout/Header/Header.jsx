@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 // import { history } from '../../../../App'
 // import { USER_LOGIN, TOKEN_CYBER } from '../../../../ulti/constants/Settings'
@@ -6,6 +6,8 @@ import { USER_LOGIN, TOKEN_CYBER } from '../../../../constants/baseSettings/sett
 import StatusUser from './StatusUser/StatusUser'
 // import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
+import { useSelector } from 'react-redux';
+import { checkLogin } from '../../../../App';
 // import { Drawer, Button } from "antd";
 // import { Menu } from "antd";
 
@@ -15,17 +17,24 @@ import 'tippy.js/dist/tippy.css';
 // const MenuItemGroup = Menu.ItemGroup;
 
 const isActiveMenu = (isActive) => {
+    // console.log(isActive)
     if (!isActive) {
         return "nav-link flex items-center p-5 text-white text-lg unselected font-semibold hover:text-orange-main"
     } else {
-        return "nav-link flex items-center p-5 text-white text-lg font-semibold border-b-2 border-transparent text-orange-main border-orange-main hover:text-orange-main"
+        return "nav-link flex items-center p-5 text-lg font-semibold text-orange-main border-orange-main hover:text-orange-main"
     }
 }
 
 
 
 export default function Header(props) {
-    let userLogin = JSON.parse(localStorage.getItem(USER_LOGIN))
+    const {userLogin} = useSelector(state => state.userReducer)
+    const isLogin = checkLogin()
+    let userHeader = isLogin? JSON.parse(localStorage.getItem(USER_LOGIN)) || userLogin : null
+    useEffect (()=> {
+
+    })
+    // console.log(userLogin)
     return (
         <>
             <header className="pb-5 bg-blue-main bg-opacity-500/75 text-coolGray-100 w-100 z-10000 text-white sticky top-0">
@@ -50,25 +59,25 @@ export default function Header(props) {
                         </a>
                         <ul className="items-stretch space-x-3 flex mb-0 ml-20 lg:ml-64">
                             <li className="flex">
-                                <NavLink to="/home" exact="true"
-                                    className={isActive => isActiveMenu(isActive)}
+                                <NavLink to="/home"
+                                    className={isActive => isActiveMenu(isActive.isActive)}
                                 >HOME</NavLink>
                             </li>
                             <li className="flex">
-                                <NavLink exact="true" to="/showtimes" className={isActive => isActiveMenu(isActive)}>SHOWTIMES</NavLink>
+                                <NavLink to="/showtimes" className={isActive => isActiveMenu(isActive.isActive)}>SHOWTIMES</NavLink>
                             </li>
                             <li className="flex">
-                                <NavLink to="/news" exact="true"
-                                    className={isActive => isActiveMenu(isActive)}
+                                <NavLink to="/news"
+                                    className={isActive => isActiveMenu(isActive.isActive)}
                                 >PROMOTIONS</NavLink>
                             </li>
                             <li className="flex">
-                                <NavLink to="/contact" exact="true"
-                                    className={isActive => isActiveMenu(isActive)}
+                                <NavLink to="/contact"
+                                    className={isActive => isActiveMenu(isActive.isActive)}
                                 >CONTACT</NavLink>
                             </li>
                         </ul>
-                        <StatusUser user={userLogin} />
+                        <StatusUser user={userHeader} />
                         <button className="p-4 lg:hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 text-coolGray-100">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />

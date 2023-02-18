@@ -1,6 +1,7 @@
 import React from 'react'
 import Googlemap from '../Googlemap/Googlemap'
 import { Row, Col } from 'antd'
+import { ADDRESS_LOCATION } from '../../constants/baseSettings/settings'
 // import { history } from '../../App'
 
 
@@ -55,7 +56,7 @@ export default function Contactform() {
                         </div>
                     </Col>
                     <Col lg={12} md={24} xs={24} className="px-3 hidden md:block">
-                        <Googlemap />
+                        <Googlemap link={ADDRESS_LOCATION}/>
                     </Col>
                 </Row>
                 <Row className="row">

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { Row, Col } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
@@ -9,26 +9,43 @@ import "./bookticket.css"
 import { TicketInfo } from '../../../core/models/BookTicketsInfo';
 import { USER_LOGIN } from '../../../constants/baseSettings/settings';
 import { getTicketsUserLogin } from '../../../features/user/userAction';
-import { useParams } from 'react-router';
+import { startLoading, stopLoading } from '../../../features/loading/loadingSlice';
+// import { useParams } from 'react-router';
 
 
 
 
 export default function ChecoutTickets(props) {
     const { userLogin } = useSelector(state => state.userReducer)
-    const { id, userInfo } = props
-    const { ticketRoom, selectingSeats } = useSelector(state => state.ticketsRoomReducer)
+    const { ticketRoom } = useSelector(state => state.ticketsRoomReducer)
+    const [seatSelect, setSelectSeat] = useState([])
+    const { id } = props
     const dispatch = useDispatch()
     const { thongTinPhim, danhSachGhe } = ticketRoom
 
+    const chooseSeats = ((seat) => {
+        let selectSeatUppdate = [...seatSelect]
+        let index = selectSeatUppdate.findIndex(item =>
+            item.maGhe === seat.maGhe
+        )
+        if (index !== -1) {
+            selectSeatUppdate.splice(index, 1)
+        } else {
+            selectSeatUppdate.push(seat)
+        }
+        setSelectSeat(selectSeatUppdate)
+        // console.log(seatSelect)
+    })
 
     useEffect(() => {
         dispatch(getTicketRoom(id))
-        dispatch(getTicketsUserLogin({ taiKhoan: userInfo.taiKhoan }))
+        // console.log(ticketRoom)
+        dispatch(getTicketsUserLogin({ taiKhoan: userLogin.taiKhoan }))
     }, [])
     // console.log(danhSachGhe)
 
     const renderSeats = () => {
+        // console.log(danhSachGhe)
         return danhSachGhe?.map((seat, index) => {
             let seatType = ''
             switch (seat.loaiGhe) {
@@ -44,12 +61,12 @@ export default function ChecoutTickets(props) {
             if (seat.daDat) {
                 seatType = 'seat-booked'
             }
-            let indexSelect = selectingSeats.findIndex(seactSl => seactSl.maGhe === seat.maGhe)
+            let indexSelect = seatSelect.findIndex(seactSl => seactSl.maGhe === seat.maGhe)
             if (indexSelect !== -1) {
                 seatType = 'seat-booking'
             }
             if (seat.taiKhoanNguoiDat === JSON.parse(localStorage.getItem(USER_LOGIN)).taiKhoan) {
-                seat.stt = <i className="fa fa-user text-gray-300"></i>
+                // seat.stt = <i className="fa fa-user text-gray-300"></i>
                 seatType = 'your-seat'
             }
             return (
@@ -57,14 +74,15 @@ export default function ChecoutTickets(props) {
                     <button
                         disabled={seat.daDat}
                         className={`seat ${seatType}`}
-                    // onClick={() => {
-                    //     let action = {
-                    //         type: POST_SELECT_SEAT,
-                    //         value: seat
-                    //     }
-                    //     dispatch(action)
-                    // }}
-                    >{seat.stt}</button>
+                        onClick={() => {
+                            // let action = {
+                            //     type: POST_SELECT_SEAT,
+                            //     value: seat
+                            // }
+                            // dispatch(action)
+                            chooseSeats(seat)
+                        }}
+                    >{!(seatType === 'your-seat') ? seat.stt : <i className="fa fa-user text-gray-300"></i>}</button>
                     {(index + 1) % 16 === 0 ? <br /> : ""}
                 </Fragment>
             )
@@ -72,25 +90,34 @@ export default function ChecoutTickets(props) {
     }
 
     const renderSelectList = () => {
-        return _.sortBy(selectingSeats, ['maGhe'])?.map((seat, index) => {
+        return _.sortBy(seatSelect, ['maGhe'])?.map((seat, index) => {
             return <p key={index} className='text-orange-400 text-2xl font-bold p-2 mb-0 text-center'>{seat.tenGhe}</p>
         })
     }
 
     const renderTotal = () => {
-        return selectingSeats?.reduce((total, seat) => {
+        return seatSelect?.reduce((total, seat) => {
             return total += seat.giaVe
         }, 0).toLocaleString()
     }
 
     const bookTickets = () => {
-        if (selectingSeats.length > 0) {
+        if (seatSelect.length > 0) {
             const bookTickets = new TicketInfo();
-            bookTickets.maLichChieu = props.match.params.id
-            bookTickets.danhSachVe = selectingSeats;
+            bookTickets.maLichChieu = id
+            bookTickets.danhSachVe = seatSelect;
             bookTickets.taiKhoanNguoiDung = userLogin.taiKhoan
-            let action = bookTicketAction(bookTickets)
-            dispatch(action)
+            // console.log(bookTickets)
+            dispatch(startLoading())
+            dispatch(bookTicketAction(bookTickets))
+                .then((res) => {
+                    dispatch(getTicketsUserLogin({ taiKhoan: userLogin.taiKhoan }))
+                        .then(() => {
+                            dispatch(stopLoading())
+                        })
+                    dispatch(getTicketRoom(id))
+                })
+            setSelectSeat([])
         } else {
             alert("PLEASE SELECT SEATS")
         }
@@ -145,7 +172,7 @@ export default function ChecoutTickets(props) {
                         <div className="backdrop p-6 rounded-lg">
                             <h1 className="text-3xl text-orange-main font-bold text-center" >{renderTotal()} VNĐ</h1>
                             <hr />
-                            <h3 className="text-2xl text-white font-bold py-3 text-yellow-300 mb-0">{thongTinPhim?.tenPhim.toUpperCase()}</h3>
+                            <h3 className="text-2xl text-white font-bold py-3 text-yellow-300 mb-0">{thongTinPhim?.tenPhim?.toUpperCase()}</h3>
                             <p className="text-lg text-white">Address:  {thongTinPhim?.tenCumRap} -
                                 <span className='text-orange-400'> {thongTinPhim?.tenRap}</span>
                             </p>

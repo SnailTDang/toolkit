@@ -1,11 +1,15 @@
 import React, { memo } from 'react'
-import { Tabs, Space, Row, Col } from 'antd';
+import { Tabs, Space } from 'antd';
 import { Link, NavLink } from 'react-router-dom';
 import moment from 'moment';
 import './home.css'
 
 
 const { TabPane } = Tabs;
+
+// const changeDefaultTab = (dispatch) => {
+//     dispatch(changeTab('1'))
+// }
 
 // const renderTab = (list) => {
 //     let items = list.map((item, index) => {
@@ -16,14 +20,14 @@ const { TabPane } = Tabs;
 
 const renderCinemeList = (list) => {
     return list?.map((cinemas, index) => {
-        return <TabPane tab={<img className='w-20 m-auto' src={cinemas.logo} />} key={index}>
+        return <TabPane tab={<img className='w-20 m-auto' src={cinemas.logo} alt='img' />} key={index}>
             <Tabs tabPosition={'left'}>
                 {cinemas.lstCumRap?.map((cine, index) => {
                     return <TabPane
                         className='w-full'
                         tab={
                             <div className='flex items-center justify-center'>
-                                <img className='w-20' src={cinemas.logo} />
+                                <img className='w-20' src={cinemas.logo} alt='img' />
                                 <div className="text-left ml-4 lg:w-80 w-full text-white ">
                                     <p className='text-lg mb-0 break-words whitespace-pre-wrap hover:text-orange-300'>{cine.tenCumRap}</p>
                                     <p className='break-words whitespace-pre-wrap'>{cine.diaChi}</p>
@@ -49,7 +53,10 @@ const renderCinemeList = (list) => {
                                                 <div className="grid xs:grid-cols-2 grid-cols-1 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-3">
                                                     {movies.lstLichChieuTheoPhim?.slice(0, 10).map((shTimes, index) => {
                                                         return (
-                                                            <Link exact to={`/checkout/${shTimes.maLichChieu}`} key={index} className='text-lg font-bold p-2 bg-btn-home text-white'>
+                                                            <Link exact to={`/checkout/${shTimes.maLichChieu}`}
+                                                                // onClick={() => { changeDefaultTab() }}
+                                                                key={index}
+                                                                className='text-lg font-bold p-2 bg-btn-home text-white'>
                                                                 {moment(shTimes.ngayChieuGioChieu).format('hh:mm A')}
                                                             </Link>
                                                         )
@@ -64,14 +71,15 @@ const renderCinemeList = (list) => {
                     </TabPane>
                 })
                 }
-
             </Tabs >
         </TabPane >
     })
 }
 
 const CinemasList = (props) => {
+
     // console.log(props.cinemaCyber)
+    // const dispatch = useDispatch()
     return (
         <div className="" >
             <div className='container pt-10 pb-20' id='showtimes-cinema'>

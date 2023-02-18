@@ -7,7 +7,7 @@ export const getListMovies = createAsyncThunk(
     async (params, { rejectWithValue }) => {
         try {
             const response = await moviesManager.getListMovies(params)
-            console.log(response)
+            // console.log(response)
             return response.data
         } catch (err) {
             return rejectWithValue(err.data)
@@ -20,7 +20,7 @@ export const getDetailMovie = createAsyncThunk(
     async (params, { rejectWithValue }) => {
         try {
             const response = await cinemaServices.getShowtimeMovie(params)
-            console.log(response)
+            // console.log(response)
             return response.data
         } catch (err) {
             return rejectWithValue(err.data)

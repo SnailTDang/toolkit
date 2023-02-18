@@ -31,16 +31,17 @@ export default function StatusUser(props) {
         if (!user) {
             return (
                 <div className="items-center flex-shrink-0 hidden lg:flex">
-                    <NavLink to='/login' exact
+                    <NavLink to='/login'
                         className={isActive => {
-                            return isActiveRegister(isActive) + " border-none"
+                            return isActiveRegister(isActive.isActive) + " border-none"
                         }}>
                         Sign in
                     </NavLink>
                     <span className='text-3xl'>/</span>
-                    <NavLink exact to='/register'
+                    <NavLink to='/register'
                         className={isActive => {
-                            return isActiveRegister(isActive) + " border-none"
+                            // console.log(isActive)
+                            return isActiveRegister(isActive.isActive) + " border-none"
                         }}>
                         Sign up
                     </NavLink>
@@ -55,8 +56,8 @@ export default function StatusUser(props) {
                         render={(attrs, content) => (
                             <div className="box" tabIndex="0" {...attrs}>
                                 <div className='bg-white w-60 p-4 bg-gray-600 user-submenu relative'>
-                                    <NavLink exact to="/history-booking" className={isActive => isActiveMenu(isActive)}>History Booking</NavLink>
-                                    <NavLink exact to="/home" className={isActive => isActiveMenu(isActive)}>Profile</NavLink>
+                                    <NavLink to="/history-booking" className={isActive => isActiveMenu(isActive.isActive)}>History Booking</NavLink>
+                                    <NavLink to="/home" className={isActive => isActiveMenu(isActive.isActive)}>Profile</NavLink>
                                 </div>
                                 {content}
                             </div>

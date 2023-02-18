@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { userLoginAction } from '../../features/user/userAction';
-import "./loginform.css"
 import { useDispatch, useSelector } from 'react-redux';
 // import { history } from '../../App';
 import { Col, Row } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import "./loginform.css"
 
 
 
@@ -44,13 +44,14 @@ export default function LoginForm(props) {
             }
             dispatch(userLoginAction(user))
             .then(()=> {
-                navigate(-1)
+                console.log('áafas')
+                navigate(-1, { replace: true })
             })
         },
     });
 
     useEffect(() => {
-    }, [loginfail])
+    }, [])
 
     const hanldeInput = (e) => {
         if (e.target.value.trim() !== '') {
@@ -116,9 +117,9 @@ export default function LoginForm(props) {
                             </div>
                             <div className="flex-sb-m w-full pt-3 pb-2">
                                 <div>
-                                    <a href="#" className="txt1">
+                                    <Link to="/" className="txt1">
                                         Forgot Password?
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                             <div className="container-login100-form-btn">
@@ -132,12 +133,12 @@ export default function LoginForm(props) {
                                 </span>
                             </div>
                             <div className="login100-form-social flex gap-2 justify-center">
-                                <a href="#" className="login100-form-social-item flex bg1 m-r-5 items-center justify-center">
+                                <Link to='/' className="login100-form-social-item flex bg1 m-r-5 items-center justify-center">
                                     <i className="fab fa-facebook-f" aria-hidden="true"></i>
-                                </a>
-                                <a href="#" className="login100-form-social-item flex bg2 m-r-5 items-center justify-center">
+                                </Link>
+                                <Link to='/' className="login100-form-social-item flex bg2 m-r-5 items-center justify-center">
                                     <i className="fab fa-twitter" aria-hidden="true" />
-                                </a>
+                                </Link>
                             </div>
                         </form>
                     </Col>

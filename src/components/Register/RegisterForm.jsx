@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userSingin } from '../../features/user/userAction';
 import { NavLink } from 'react-router-dom';
 import { Col, Row } from 'antd';
+import '../Login/loginform.css'
 
 export default function RegisterForm(props) {
     const [focus, setFocus] = useState({
@@ -61,9 +62,15 @@ export default function RegisterForm(props) {
                 soDt: values.number,
                 maNhom: values.idGroup
             }
-            const action = userSingin(user)
-            dispatch(action)
-            setSigninMess(signinfail)
+            // const action = userSingin(user)
+            dispatch(userSingin(user))
+            .then(()=> {
+                // navigator('/login')
+            })
+            .catch((errors)=> {
+                console.log(errors)
+                setSigninMess(signinfail)
+            })
         },
     });
 

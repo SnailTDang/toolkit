@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import "./loadingmini.css"
 
 export default function LoadingMini() {
-    const { isLoading } = useSelector(state => state.LoadingReducer)
+    const { isLoading } = useSelector(state => state.loadingReducer)
     // console.log(isLoading)
     return (
         <>
@@ -19,7 +19,8 @@ export default function LoadingMini() {
                             <span></span>
                         </div>
                     </div>
-                </div> : ""
+                </div> 
+                : ''
             }
         </>
     )

@@ -1,6 +1,6 @@
 import { Col, Row } from 'antd'
 import React, { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { ADDRESS_LOCATION } from '../../constants/baseSettings/settings'
 import Googlemap from '../Googlemap/Googlemap'
 import "./footer.css"
@@ -11,7 +11,7 @@ export default function Footer() {
     const [height, setHeigth] = useState(0)
 
     const handleIframe = () => {
-        if (height != 0) {
+        if (height !== 0) {
             setHeigth(0)
         } else {
             setHeigth(450)
@@ -22,12 +22,12 @@ export default function Footer() {
             <div className="container">
                 <Row className="content-1">
                     <Col lg={6} className="col-lg-3 col-md-3 col-sm-3 col-xs-12 marg-top26">
-                        <img id="logo-footer" className="img-responsive w-40" src="https://snailtdang.github.io/cyberphone/img/Brandlogo.png" />
+                        <img id="logo-footer" className="img-responsive w-40" src="https://snailtdang.github.io/cyberphone/img/Brandlogo.png" alt='null'/>
                         <h3 className="info address">Floor 1 Vision Building, Xo Viet Nghe Tinh Street, Hai Chau District, Da Nang City
                         </h3>
                         <ul>
                             <li className="clearfix">
-                                <img className="map-trigger" src="https://metiz.vn/static//assets/websites/images/map.png" />
+                                <img className="map-trigger" src="https://metiz.vn/static//assets/websites/images/map.png" alt='null'/>
                                 <button className="map-left map-trigger text-white" onClick={() => { handleIframe() }}>SEE MAPS</button>
                             </li>
                         </ul>
@@ -72,7 +72,7 @@ export default function Footer() {
                         <h1 className='text-white text-lg'>Điện thoại: <a href="tel:0236 3630 689">0236 3730 889</a></h1>
                     </Col>
                     <Col lg={6} className="col-lg-3 col-md-3 col-sm-3 col-xs-12 footer-notify">
-                        <a className="icon-notify" href="http://online.gov.vn/HomePage/CustomWebsiteDisplay.aspx?DocId=56402" target="_blank"><img className="icon-notify" src="https://metiz.vn/static//assets/websites/images/icon-notify.png" /></a>
+                        <a className="icon-notify" href="http://online.gov.vn/HomePage/CustomWebsiteDisplay.aspx?DocId=56402" rel="noreferrer" target="_blank"><img className="icon-notify" src="https://metiz.vn/static//assets/websites/images/icon-notify.png" alt='null'/></a>
                     </Col>
                 </Row>
             </div>

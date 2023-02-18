@@ -9,7 +9,7 @@ export const showTrailer = createAsyncThunk(
             console.log(params)
             return params
         } catch (err) {
-            return rejectWithValue(err.data)
+            return rejectWithValue(err.response.data)
         }
     }
 )

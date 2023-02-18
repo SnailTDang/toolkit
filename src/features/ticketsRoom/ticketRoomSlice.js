@@ -1,8 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { useDispatch } from 'react-redux'
+import { useLoading } from '../../components/Loadingmini/LoadingMini'
+// import { getLoadingStart } from '../loading/loadingAction'
+import { stopLoading, startLoading } from '../loading/loadingSlice'
 import { getTicketRoom, bookTicketAction } from './ticketRoomAction'
 
 const initialState = {
-    ticketRoom: [],
+    ticketRoom: {
+        thongTinPhim: {},
+        danhSachGhe: []
+    },
     selectingSeats: [],
     tabDefault: "1"
 }
@@ -13,20 +20,30 @@ export const ticketRoomSlice = createSlice({
     reducers: {
         initialTicketRoom: (state) => {
             state.ticketRoom = []
+        },
+        changeTab: (state, action) => {
+            // console.log(action)
+            state.tabDefault = action.payload
         }
     },
     extraReducers: (builder) => {
         builder
             .addCase(getTicketRoom.pending, (state) => {
+                // useLoading.show()
+                // dispatch(startLoading())
                 // state.loading = true
                 // state.error = ''
             })
             .addCase(getTicketRoom.fulfilled, (state, action) => {
-                // state.loading = false
-                state.ticketRoom = action.payload.items
+                // state.loading = false    
+                state.ticketRoom.thongTinPhim = action.payload.thongTinPhim
+                state.ticketRoom.danhSachGhe = action.payload.danhSachGhe
+                // useLoading.hide()
+                // stopLoading()
             })
             .addCase(getTicketRoom.rejected, (state, action) => {
                 // state.loading = false
+                // stopLoading()
                 state.ticketRoom = []
                 // state.error = action.error.message
             })
@@ -34,9 +51,15 @@ export const ticketRoomSlice = createSlice({
             .addCase(bookTicketAction.pending, (state) => {
 
             })
+            .addCase(bookTicketAction.fulfilled, (state) => {
+                state.tabDefault = '2'
+            })
+            .addCase(bookTicketAction.rejected, (state, action) => {
+                console.log(action.payload.data)
+            })
     }
 })
 
-export const { initialTicketRoom } = ticketRoomSlice.actions
+export const { initialTicketRoom, changeTab } = ticketRoomSlice.actions
 
 export default ticketRoomSlice.reducer

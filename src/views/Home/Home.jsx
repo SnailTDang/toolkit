@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import PopupTrailer from '../../components/PopupTrailer/PopupTrailer';
 import { getCinamSystem } from '../../features/cinemaSystem/cinemaSystemAction';
 import { getListMovies } from '../../features/movies/moviesAction';
+import HomeCarousel from '../../templates/HomeTemplates/Layout/HomeCarousel/HomeCarousel';
 import CinemasList from './CinemaList/CinemaList'
 import HomeMenu from './HomeMenu/HomeMenu'
 
@@ -23,6 +24,7 @@ const Home = (props) => {
     // console.log(moviesList)
     return (
         <>
+            <HomeCarousel />
             <PopupTrailer />
             <HomeMenu moviesList={listMovies} />
             <div className='' style={{

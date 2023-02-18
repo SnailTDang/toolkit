@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { userLoginAction, userSingin } from './userAction'
+import { getTicketsUserLogin, userLoginAction, userSingin } from './userAction'
 import { USER_LOGIN, TOKEN_CYBER } from '../../constants/baseSettings/settings'
+import { checkLogin } from '../../App'
 
-let isLogin = localStorage.getItem(USER_LOGIN)
+let isLogin = checkLogin()
 
 const initialState = {
     userLogin: isLogin ? JSON.parse(localStorage.getItem(USER_LOGIN)) : {},
-    userInfo: {},
+    userInfo: null,
     loginfail: '',
     signinfail: '',
 }
@@ -27,7 +28,7 @@ export const userSlice = createSlice({
             })
             .addCase(userLoginAction.fulfilled, (state, action) => {
                 // state.loading = false
-                console.log(action)
+                // console.log(action.payload)
                 state.userLogin = action.payload
                 state.loginfail = ""
                 localStorage.setItem(USER_LOGIN, JSON.stringify(action.payload))
@@ -36,12 +37,31 @@ export const userSlice = createSlice({
             })
             .addCase(userLoginAction.rejected, (state, action) => {
                 // state.loading = false
-                state.userInfo = action.payload
+                state.loginfail = action.payload
                 // state.error = action.error.message
             })
             // 
             .addCase(userSingin.rejected, (state, action) => {
                 state.signinfail = action.payload
+            })
+            //
+            .addCase(getTicketsUserLogin.pending, (state) => {
+                // state.loading = true
+                // state.error = ''
+            })
+            .addCase(getTicketsUserLogin.fulfilled, (state, action) => {
+                // state.loading = false
+                // console.log(action)
+                state.userInfo = action.payload
+                // state.loginfail = ""
+                // localStorage.setItem(USER_LOGIN, JSON.stringify(action.payload))
+                // localStorage.setItem(TOKEN_CYBER, JSON.stringify(action.payload.accessToken))
+
+            })
+            .addCase(getTicketsUserLogin.rejected, (state, action) => {
+                // state.loading = false
+                state.loginfail = action.payload
+                // state.error = action.error.message
             })
     }
 })
