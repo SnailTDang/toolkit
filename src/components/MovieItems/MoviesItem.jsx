@@ -1,6 +1,6 @@
 import moment from 'moment'
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { showTrailer } from '../../features/trailer/trailerActions'
 

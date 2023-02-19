@@ -1,23 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
-// import { history } from '../../../../App'
-// import { USER_LOGIN, TOKEN_CYBER } from '../../../../ulti/constants/Settings'
-import { USER_LOGIN, TOKEN_CYBER } from '../../../../constants/baseSettings/settings'
+import { USER_LOGIN } from '../../../../constants/baseSettings/settings'
 import StatusUser from './StatusUser/StatusUser'
-// import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { useSelector } from 'react-redux';
 import { checkLogin } from '../../../../App';
-// import { Drawer, Button } from "antd";
-// import { Menu } from "antd";
-
-// import "antd/dist/antd.css";
-
-// const SubMenu = Menu.SubMenu;
-// const MenuItemGroup = Menu.ItemGroup;
 
 const isActiveMenu = (isActive) => {
-    // console.log(isActive)
     if (!isActive) {
         return "nav-link flex items-center p-5 text-white text-lg unselected font-semibold hover:text-orange-main"
     } else {
@@ -32,9 +21,7 @@ export default function Header(props) {
     const isLogin = checkLogin()
     let userHeader = isLogin? JSON.parse(localStorage.getItem(USER_LOGIN)) || userLogin : null
     useEffect (()=> {
-
-    })
-    // console.log(userLogin)
+    },[])
     return (
         <>
             <header className="pb-5 bg-blue-main bg-opacity-500/75 text-coolGray-100 w-100 z-10000 text-white sticky top-0">

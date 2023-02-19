@@ -6,11 +6,9 @@ export const userLoginAction = createAsyncThunk(
     async (params, { rejectWithValue }) => {
         try {
             const response = await userServices.postUserLogin(params)
-            // console.log(response)
-            return response.data
+            return response
         } catch (err) {
-            // console.log(err)
-            return rejectWithValue(err.response.data)
+            return rejectWithValue(err.response)
         }
     }
 )
@@ -20,9 +18,9 @@ export const userSingin = createAsyncThunk(
     async (params, { rejectWithValue }) => {
         try {
             const response = await userServices.postUserSignIn(params)
-            return response.data
+            return response
         } catch (err) {
-            return rejectWithValue(err.response.data)
+            return rejectWithValue(err.response)
         }
     }
 )
@@ -34,7 +32,7 @@ export const getTicketsUserLogin = createAsyncThunk(
             const response = await userServices.checkTicketsUser(params)
             return response.data
         } catch (err) {
-            return rejectWithValue(err.response.data)
+            return rejectWithValue(err.response)
         }
     }
 )

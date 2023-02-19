@@ -1,5 +1,5 @@
-import React, { lazy, Suspense } from 'react';
-import { Route, Routes, Navigate, useRoutes, useNavigate } from 'react-router-dom'
+import React from 'react';
+import { Route, Routes } from 'react-router-dom'
 // import { createBrowserHistory } from 'history'
 
 // import { HomeTemplate } from './templates/HomeTemplates/HomeTemplate';
@@ -30,6 +30,7 @@ import MainLayout from './templates/layouts/MainLayout';
 import './App.css';
 import LoadingMini from './components/Loadingmini/LoadingMini';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import NotFound from './views/NotFound/NotFound';
 
 // const Home = lazy(() => import('./views/Home/Home'));
 // const Contact = lazy(() => import('./views/Contact/Contact'));
@@ -150,7 +151,7 @@ function App() {
               return <Route key={index.toString()} path={route.path} element={<Component />} />
             }
           })}
-          {/* <Route path='/checkout/:id' element={<PrivateRoute><Checkout key="111111" /></PrivateRoute>} /> */}
+          <Route path='*' element={<NotFound />} />
         </Routes>
         {/* <Route
           path="/checkout"

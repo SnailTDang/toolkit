@@ -29,10 +29,10 @@ export const userSlice = createSlice({
             .addCase(userLoginAction.fulfilled, (state, action) => {
                 // state.loading = false
                 // console.log(action.payload)
-                state.userLogin = action.payload
                 state.loginfail = ""
-                localStorage.setItem(USER_LOGIN, JSON.stringify(action.payload))
-                localStorage.setItem(TOKEN_CYBER, JSON.stringify(action.payload.accessToken))
+                state.userLogin = action.payload.data
+                localStorage.setItem(USER_LOGIN, JSON.stringify(action.payload.data))
+                localStorage.setItem(TOKEN_CYBER, JSON.stringify(action.payload.data.accessToken))
 
             })
             .addCase(userLoginAction.rejected, (state, action) => {
@@ -41,8 +41,17 @@ export const userSlice = createSlice({
                 // state.error = action.error.message
             })
             // 
+            .addCase(userSingin.pending, (state, action) => {
+                state.signinfail = ''
+                // console.log(action.payload)
+            })
+            .addCase(userSingin.fulfilled, (state, action) => {
+                state.signinfail = ''
+                // console.log(action.payload)
+            })
             .addCase(userSingin.rejected, (state, action) => {
-                state.signinfail = action.payload
+                state.signinfail = action.payload.data
+                // console.log(action.payload)
             })
             //
             .addCase(getTicketsUserLogin.pending, (state) => {

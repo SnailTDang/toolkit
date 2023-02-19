@@ -1,6 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export default function About() {
+    
+    useEffect(()=> {
+        window.document.title = 'About Vision Cinema'
+    },[])
+
     return (
         <div className="container">
             <div className='py-12'>

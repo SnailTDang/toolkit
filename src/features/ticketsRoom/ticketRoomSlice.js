@@ -1,8 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { useDispatch } from 'react-redux'
-import { useLoading } from '../../components/Loadingmini/LoadingMini'
-// import { getLoadingStart } from '../loading/loadingAction'
-import { stopLoading, startLoading } from '../loading/loadingSlice'
 import { getTicketRoom, bookTicketAction } from './ticketRoomAction'
 
 const initialState = {

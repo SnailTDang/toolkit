@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { Row, Col, Tabs } from 'antd';
 import "./detail.css"
 import { useDispatch, useSelector } from 'react-redux';
-// import { getShowTimes } from '../../features/showTimes/showTimesAction';
 import { getDetailMovie } from '../../features/movies/moviesAction';
 import moment from 'moment';
 import { NavLink, useParams } from 'react-router-dom';
@@ -15,11 +14,9 @@ const { TabPane } = Tabs;
 export default function DeitailMovies(props) {
     const { id } = useParams()
     const { detailMovie } = useSelector(state => state.moviesReducer)
-    let { danhGia, heThongRapChieu, hinhAnh, moTa, ngayKhoiChieu, tenPhim, trailer } = detailMovie
+    let { danhGia, heThongRapChieu, hinhAnh, moTa, ngayKhoiChieu, tenPhim } = detailMovie
     const dispatch = useDispatch()
-    // console.log(props.match.params.id)
     useEffect(() => {
-        // let id = props.idMovie;
         dispatch(getDetailMovie(id))
     }, [])
 
@@ -98,10 +95,10 @@ export default function DeitailMovies(props) {
                                                             <p className='mb-0'>{cinema.diaChi}</p>
                                                         </div>
                                                     </div>
-                                                    <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 xl:grid-cols-10 gap-3 py-4">
+                                                    <div className="grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-8 xl:grid-cols-9 gap-3 py-4">
                                                         {cinema.lichChieuPhim?.map((shTimes, index) => {
                                                             return (
-                                                                <NavLink exact to={`/checkout/${shTimes.maLichChieu}`} key={index} className='text-lg font-bold p-2 border-2 border-orange-main bg-yellow-200'>
+                                                                <NavLink exact to={`/checkout/${shTimes.maLichChieu}`} key={index} className='sm:text-lg lg:text-md 2xl:text-lg font-bold p-2 border-2 border-orange-main bg-yellow-200 text-center'>
                                                                     {moment(shTimes.ngayChieuGioChieu).format('hh:mm A')}
                                                                 </NavLink>
                                                             )

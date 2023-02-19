@@ -1,12 +1,9 @@
-import React, { memo } from 'react'
-import { useDispatch } from 'react-redux';
-// import { GET_MOVIES_COMING, GET_MOVIES_SHOWING } from '../../../redux/types/ListMoviesType';
+import React from 'react'
 
 import MovieSwiper from '../../../components/MoviesSwiper/MovieSwiper';
 
 
 const HomeMenu = (props) => {
-    // const dispatch = useDispatch()
     let activeButtonShowing = props.moviesList.showing === true ? 'active-button-film' : '';
     let activeButtonComing = props.moviesList.coming === true ? 'active-button-film' : '';
     return (

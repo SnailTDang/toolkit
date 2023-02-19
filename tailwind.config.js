@@ -12,22 +12,14 @@ module.exports = {
 
       // default breakpoints but with 40px removed
       screens: {
-        "xs": "420px",
-        "sm": '540px',
+        "xs": "360px",
+        "sm": '480px',
         "md": '	768px',
         "lg": '960px',
         "xl": '1140px',
         '2xl': '1320px',
       },
     },
-    // screens: {
-    //   "xs": "",
-    //   "sm": '576px',
-    //   "md": '768px',
-    //   "lg": '720px',
-    //   "xl": '992px',
-    //   '2xl': '1400px',
-    // },
     extend: {
       fontFamily: {
         'sans': ['Saira Semi Condensed', 'sans-serif'],
@@ -57,6 +49,7 @@ module.exports = {
         '400': '400px',
         '300': '300px',
         '350': "350px",
+        '30': '30px'
       },
       width: {
         '250': "250px"

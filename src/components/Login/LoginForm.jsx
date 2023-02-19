@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { userLoginAction } from '../../features/user/userAction';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 // import { history } from '../../App';
 import { Col, Row } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
@@ -19,9 +19,21 @@ export default function LoginForm(props) {
         pass: false,
     })
     const navigate = useNavigate();
-    const { loginfail } = useSelector(state => state.userReducer)
+    const [message, setMessage] = useState('')
 
     const dispatch = useDispatch()
+
+    const submitLogin =  (user) => {
+        dispatch(userLoginAction(user))
+            .then((res)=> {
+                let response = res.payload
+                if(response.status !== 200){
+                    setMessage(response.data)
+                } else {
+                    navigate(-1, { replace: true })
+                }
+            })
+    }
 
     const formik = useFormik({
         initialValues: {
@@ -42,11 +54,7 @@ export default function LoginForm(props) {
                 taiKhoan: values.account,
                 matKhau: values.pass
             }
-            dispatch(userLoginAction(user))
-            .then(()=> {
-                console.log('áafas')
-                navigate(-1, { replace: true })
-            })
+            submitLogin(user)
         },
     });
 
@@ -62,6 +70,7 @@ export default function LoginForm(props) {
         setFocus(
             { ...focus }
         )
+        setMessage('')
     }
 
     return (
@@ -73,7 +82,7 @@ export default function LoginForm(props) {
                             <h1 className="login100-form-title p-4 font-bold text-orange-main">
                                 LOGIN TO CONTINIUE
                             </h1>
-                            <div className="mb-5">
+                            <div className="pb-1">
                                 <div className="wrap-input100 validate-input" data-validate="Valid account is required: ex@abc.xyz">
                                     <input className={`input100 ${focus.account === true ? 'has-val' : ''}`} type="text" name="account"
                                         onChange={(e) => {
@@ -88,11 +97,13 @@ export default function LoginForm(props) {
                                     <span className="focus-input100" />
                                     <span className="label-input100">Account</span>
                                 </div>
+                                <div className="h-30">
                                 {formik.touched.account && formik.errors.account ? (
-                                    <div className='pt-2 text-red-600'>{formik.errors.account}</div>
+                                    <div className='py-1 text-red-600'>{formik.errors.account}</div>
                                 ) : null}
+                                </div>
                             </div>
-                            <div className="mt-6">
+                            <div className="pt-1">
                                 <div className="wrap-input100 validate-input" data-validate="Password is required">
                                     <input className={`input100 ${focus.pass === true ? 'has-val' : ''}`} type="password" name="pass"
                                         onChange={(e) => {
@@ -106,19 +117,26 @@ export default function LoginForm(props) {
                                     <span className="focus-input100" />
                                     <span className="label-input100">Password</span>
                                 </div>
+                                <div className="h-30">
                                 {formik.touched.pass && formik.errors.pass ? (
-                                    <div className='pt-2 text-red-600'>{formik.errors.pass}</div>
+                                    <div className='py-1 text-red-600'>{formik.errors.pass}</div>
                                 ) : null}
-                            </div>
-                            <div className="flex-sb-m w-full pt-3" >
-                                <div>
-                                    <span className='text-red-600'>{loginfail}</span>
+                                    <span className='text-red-600'>{message}</span>
                                 </div>
                             </div>
-                            <div className="flex-sb-m w-full pt-3 pb-2">
+                            {/* <div className="flex-sb-m w-full pt-3" >
+                                <div>
+                                </div>
+                            </div> */}
+                            <div className="flex justify-between w-full pb-2">
                                 <div>
                                     <Link to="/" className="txt1">
                                         Forgot Password?
+                                    </Link>
+                                </div>
+                                <div>
+                                    <Link to="/register" className="txt1">
+                                        Don't have an account yet?
                                     </Link>
                                 </div>
                             </div>

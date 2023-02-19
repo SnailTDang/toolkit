@@ -3,8 +3,8 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { userSingin } from '../../features/user/userAction';
-import { NavLink } from 'react-router-dom';
+import { userLoginAction, userSingin } from '../../features/user/userAction';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Col, Row } from 'antd';
 import '../Login/loginform.css'
 
@@ -16,10 +16,10 @@ export default function RegisterForm(props) {
         number: false,
         fullname: false,
     })
-
+    const navigate = useNavigate()
 
     const { signinfail } = useSelector(state => state.userReducer)
-    const [signinMess, setSigninMess] = useState(signinfail)
+    const [signinMess, setSigninMess] = useState('')
 
     const dispatch = useDispatch()
 
@@ -63,13 +63,22 @@ export default function RegisterForm(props) {
                 maNhom: values.idGroup
             }
             // const action = userSingin(user)
+            // dispatch(userSingin(user))
             dispatch(userSingin(user))
-            .then(()=> {
-                // navigator('/login')
+            .then((res)=> {
+                console.log(res)
+                let user = {
+                    taiKhoan: values.account,
+                    matKhau: values.pass
+                }
+                if(res.payload.status === 200) {
+                    dispatch(userLoginAction(user))
+                    navigate('/', { replace: true })
+                    // navigator('/login')
+                }
+                // setSigninMess(signinfail)
             })
-            .catch((errors)=> {
-                console.log(errors)
-                setSigninMess(signinfail)
+            .catch(()=> {
             })
         },
     });
@@ -79,7 +88,7 @@ export default function RegisterForm(props) {
     }, [signinfail])
 
     const hanldeInput = (e) => {
-        if (e.target.value.trim() != '') {
+        if (e.target.value.trim() !== '') {
             focus[e.target.name] = true;
         } else {
             focus[e.target.name] = false;

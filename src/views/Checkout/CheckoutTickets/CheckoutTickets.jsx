@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { Row, Col } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import _ from 'lodash';
 // import { TicketRoomAction, BookTicketsAction } from "../../../redux/actions/TicketRoomAction"
 import { getTicketRoom, bookTicketAction } from '../../../features/ticketsRoom/ticketRoomAction';
@@ -16,10 +16,9 @@ import { startLoading, stopLoading } from '../../../features/loading/loadingSlic
 
 
 export default function ChecoutTickets(props) {
-    const { userLogin } = useSelector(state => state.userReducer)
-    const { ticketRoom } = useSelector(state => state.ticketsRoomReducer)
+    // const { userLogin } = useSelector(state => state.userReducer)
+    const { ticketRoom, userLogin, id } = props
     const [seatSelect, setSelectSeat] = useState([])
-    const { id } = props
     const dispatch = useDispatch()
     const { thongTinPhim, danhSachGhe } = ticketRoom
 
@@ -38,9 +37,9 @@ export default function ChecoutTickets(props) {
     })
 
     useEffect(() => {
-        dispatch(getTicketRoom(id))
+        // dispatch(getTicketRoom(id))
         // console.log(ticketRoom)
-        dispatch(getTicketsUserLogin({ taiKhoan: userLogin.taiKhoan }))
+        // dispatch(getTicketsUserLogin({ taiKhoan: userLogin.taiKhoan }))
     }, [])
     // console.log(danhSachGhe)
 
@@ -107,7 +106,6 @@ export default function ChecoutTickets(props) {
             bookTickets.maLichChieu = id
             bookTickets.danhSachVe = seatSelect;
             bookTickets.taiKhoanNguoiDung = userLogin.taiKhoan
-            // console.log(bookTickets)
             dispatch(startLoading())
             dispatch(bookTicketAction(bookTickets))
                 .then((res) => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Modal, Button } from 'antd';
+import { Modal } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { hideTrailer } from '../../features/trailer/trailerActions';
 import './popuptrailer.css'

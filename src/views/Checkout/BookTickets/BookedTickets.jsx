@@ -4,26 +4,18 @@ import moment from 'moment'
 import _ from 'lodash'
 import { NavLink } from 'react-router-dom'
 import { getListMovies } from '../../../features/movies/moviesAction'
-import { checkLogin } from '../../../App'
-import { getTicketsUserLogin } from '../../../features/user/userAction'
-// import { history } from '../../../App'
 
 
 
-export default function BookTickets(props) {
-    // console.log(props)
-    const ticketList = props.userInfo.thongTinDatVe
-    // const isLogin = checkLogin()
-    // const { moviesList } = useSelector(state => state.ListMoviesReducer);
+export default function BookedTickets(props) {
+    const ticketList = props.userInfo?.thongTinDatVe
     const { listMovies } = useSelector(state => state.moviesReducer);
     const dispatch = useDispatch()
+
     useEffect(() => {
-        // if (isLogin) {
-        //     console.log(isLogin)
-        //     dispatch(getTicketsUserLogin(JSON.parse(isLogin)))
-        // }
         dispatch(getListMovies('GP03'))
     }, [])
+
     const getIdMovie = (name) => {
         let idFilm = ""
         // console.log(listMovies)
@@ -40,8 +32,8 @@ export default function BookTickets(props) {
         return idFilm;
     }
     const renderTicketBooking = (ticketList) => {
-        let arrayTickets = [...ticketList].reverse()
-        if (arrayTickets.length) {
+        if (ticketList?.length) {
+            let arrayTickets = [...ticketList].reverse()
             return arrayTickets.map((ticket, index) => {
                 // getIdMovie(ticket.tenPhim)
                 let cost = ticket.giaVe * ticket.danhSachGhe.length
