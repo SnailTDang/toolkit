@@ -51,7 +51,6 @@ export const ticketRoomSlice = createSlice({
                 state.tabDefault = '2'
             })
             .addCase(bookTicketAction.rejected, (state, action) => {
-                console.log(action.payload.data)
             })
     }
 })

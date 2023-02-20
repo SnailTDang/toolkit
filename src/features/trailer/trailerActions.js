@@ -6,7 +6,6 @@ export const showTrailer = createAsyncThunk(
     'showTrailerAction',
     async (params, { rejectWithValue }) => {
         try {
-            console.log(params)
             return params
         } catch (err) {
             return rejectWithValue(err.response.data)
