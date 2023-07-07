@@ -5,6 +5,6 @@ import { checkLogin } from '../../App'
 export default function PrivateRoute({children}) {
     const isLogin = checkLogin()
     return (
-    isLogin ? children : <Navigate to='/login'/>
+    isLogin ? children : <Navigate to='/login' replace={true}/>
     )
 }
