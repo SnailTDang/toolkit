@@ -1,39 +1,33 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
-import { getBanners } from './bannersAction'
+import { getBanners } from "./bannersAction";
 
 const initialState = {
-    bannersList: []
-}
+    bannersList: [],
+};
 
 export const bannersSlice = createSlice({
-    name: 'banners',
+    name: "banners",
     initialState,
     reducers: {
         initialBanners: (state) => {
-            state.bannersList = []
-        }
+            state.bannersList = [];
+        },
     },
     extraReducers: (builder) => {
         builder
-            .addCase(getBanners.pending, (state) => {
-                // state.loading = true
-                // state.error = ''
-            })
+            .addCase(getBanners.pending, (state) => {})
             .addCase(getBanners.fulfilled, (state, action) => {
-                // state.loading = false
-                // console.log(action.payload)
-                // console.log(state.bannersList)
-                state.bannersList = action.payload
+                state.bannersList = action.payload;
             })
             .addCase(getBanners.rejected, (state, action) => {
                 // state.loading = false
-                state.bannersList = []
+                state.bannersList = [];
                 // state.error = action.error.message
-            })
-    }
-})
+            });
+    },
+});
 
-export const { initialBanners } = bannersSlice.actions
+export const { initialBanners } = bannersSlice.actions;
 
-export default bannersSlice.reducer
+export default bannersSlice.reducer;

@@ -8,7 +8,7 @@ export default function Login() {
 
     return (
         <>
-            {isLogin ? <Navigate to='/' replace={false} /> : <div div className="container" >
+            {isLogin ? <Navigate to={-1} replace={true} /> : <div div className="container" >
                 <LoginForm />
             </div >}
         </>

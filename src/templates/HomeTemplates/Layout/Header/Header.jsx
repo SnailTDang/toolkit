@@ -46,7 +46,7 @@ export default function Header(props) {
                         </a>
                         <ul className="items-stretch space-x-3 flex mb-0 ml-20 lg:ml-64">
                             <li className="flex">
-                                <NavLink to="/home"
+                                <NavLink to="/"
                                     className={isActive => isActiveMenu(isActive.isActive)}
                                 >HOME</NavLink>
                             </li>
@@ -62,6 +62,11 @@ export default function Header(props) {
                                 <NavLink to="/contact"
                                     className={isActive => isActiveMenu(isActive.isActive)}
                                 >CONTACT</NavLink>
+                            </li>
+                            <li className="flex">
+                                <NavLink to="/login"
+                                    className={isActive => isActiveMenu(isActive.isActive)}
+                                >LOGIN</NavLink>
                             </li>
                         </ul>
                         <StatusUser user={userHeader} />

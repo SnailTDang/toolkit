@@ -124,10 +124,6 @@ export default function LoginForm(props) {
                                     <span className='text-red-600'>{message}</span>
                                 </div>
                             </div>
-                            {/* <div className="flex-sb-m w-full pt-3" >
-                                <div>
-                                </div>
-                            </div> */}
                             <div className="flex justify-between w-full pb-2">
                                 <div>
                                     <Link to="/" className="txt1">
