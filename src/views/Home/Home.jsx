@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from "react";
+import React, { memo, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PopupTrailer from "../../components/PopupTrailer/PopupTrailer";
 import { getCinamSystem } from "../../features/cinemaSystem/cinemaSystemAction";
@@ -14,16 +14,31 @@ const Home = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getListMovies("GP03"));
-        dispatch(getCinamSystem("GP03"));
-    }, [dispatch]);
+        dispatch(getListMovies("GP05"));
+        dispatch(getCinamSystem("GP05"));
+    }, []);
 
-    // console.log(moviesList)
+    const getMoviesByType = useCallback((conitions = "showing") => {
+        switch (conitions) {
+            case "showing":
+                dispatch(getListMovies("GP05"));
+                break;
+            case "coming":
+                dispatch(getListMovies("GP04"));
+                break;
+            default:
+                break;
+        }
+    }, []);
+
     return (
         <>
             <HomeCarousel />
             <PopupTrailer />
-            <HomeMenu moviesList={listMovies} />
+            <HomeMenu
+                moviesList={listMovies}
+                getMoviesByType={getMoviesByType}
+            />
             <div
                 className=""
                 style={{

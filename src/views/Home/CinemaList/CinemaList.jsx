@@ -73,7 +73,7 @@ const renderCinemeList = (list) => {
                                                                 {movies.tenPhim.toUpperCase()}
                                                             </h1>
                                                         </NavLink>
-                                                        <div className="grid sm:grid-cols-2 grid-cols-1 md:grid-cols-3 xl:grid-cols-4 xl:grid-cols-6 gap-3">
+                                                        <div className="grid sm:grid-cols-2 grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-3">
                                                             {movies.lstLichChieuTheoPhim?.map(
                                                                 (
                                                                     shTimes,

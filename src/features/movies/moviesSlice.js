@@ -1,6 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
-import { getListMovies, getDetailMovie } from './moviesAction'
+import { getListMovies, getDetailMovie } from "./moviesAction";
 
 const initialState = {
     listMovies: {
@@ -9,57 +9,54 @@ const initialState = {
         coming: null,
         showing: null,
     },
-    detailMovie: {}
-}
+    detailMovie: {},
+};
 
 export const listMoviesSlice = createSlice({
-    name: 'listMovies',
+    name: "listMovies",
     initialState,
     reducers: {
         initiallistMovies: (state) => {
-            state.listMovies = {}
+            state.listMovies = {};
         },
         initialDetailMovie: (state) => {
-            state.detailMovie = {}
-        }
+            state.detailMovie = {};
+        },
     },
     extraReducers: (builder) => {
         builder
-            .addCase(getListMovies.pending, (state) => {
-                // state.loading = true
-                // state.error = ''
-            })
+            .addCase(getListMovies.pending, (state) => {})
             .addCase(getListMovies.fulfilled, (state, action) => {
-                // state.loading = false
-                // console.log(action.payload)
-                state.listMovies.arrayMovie = action.payload
-                state.listMovies.arrayMovieDefault = action.payload
-                state.listMovies.showing = true
+                state.listMovies.arrayMovie = action.payload;
+                state.listMovies.arrayMovieDefault = action.payload;
+                state.listMovies.showing = true;
             })
             .addCase(getListMovies.rejected, (state, action) => {
-                // state.loading = false
-                state.listMovies.arrayMovie = []
-                // state.error = action.error.message
+                state.listMovies.arrayMovie = [];
             })
             //
+            // .addCase(getListMovies.pending, (state) => {})
+            // .addCase(getListMovies.fulfilled, (state, action) => {
+            //     state.listMovies.arrayMovie = action.payload;
+            //     state.listMovies.arrayMovieDefault = action.payload;
+            //     state.listMovies.coming = true;
+            // })
+            // .addCase(getListMovies.rejected, (state, action) => {
+            //     state.listMovies.arrayMovie = [];
+            // })
+            //
             .addCase(getDetailMovie.pending, (state, action) => {
-                // state.loading = false
-                state.detailMovie = []
-                // state.error = action.error.message
+                state.detailMovie = [];
             })
             .addCase(getDetailMovie.fulfilled, (state, action) => {
-                // state.loading = false
-                state.detailMovie = action.payload
-                // state.error = action.error.message
+                state.detailMovie = action.payload;
             })
             .addCase(getDetailMovie.rejected, (state, action) => {
-                // state.loading = false
-                state.detailMovie = []
-                // state.error = action.error.message
-            })
-    }
-})
+                state.detailMovie = [];
+            });
+    },
+});
 
-export const { initiallistMovies } = listMoviesSlice.actions
+export const { initiallistMovies } = listMoviesSlice.actions;
 
-export default listMoviesSlice.reducer
+export default listMoviesSlice.reducer;

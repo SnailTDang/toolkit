@@ -1,15 +1,16 @@
-import React, { useMemo } from "react";
+import React, { memo, useMemo, useState } from "react";
 import MovieSwiper from "../../../components/MoviesSwiper/MovieSwiper";
 
 const HomeMenu = (props) => {
-    const { showing, coming } = props.moviesList;
+    const [show, setShow] = useState(true);
+    const { getMoviesByType } = props;
 
     const buttonActive = useMemo(() => {
         return {
-            showing: showing === true ? "active-button-film" : "",
-            coming: coming === true ? "active-button-film" : "",
+            showing: show === true ? "active-button-film" : "",
+            coming: show === false ? "active-button-film" : "",
         };
-    }, [showing, coming]);
+    }, [show]);
 
     return (
         <div className="bg-[url('https://metiz.vn/static/assets/websites/images/bg-session-movie.png')] py-10">
@@ -18,24 +19,20 @@ const HomeMenu = (props) => {
                     <button
                         type="button"
                         className={`${buttonActive.showing} text-xl text-white border-white border-2 px-8 py-3 font-semibold rounded-full hover:bg-orange-main mr-4`}
-                        // onClick={() => {
-                        //     const action = {
-                        //         type: GET_MOVIES_SHOWING,
-                        //     }
-                        //     dispatch(action)
-                        // }}
+                        onClick={() => {
+                            getMoviesByType();
+                            setShow(true);
+                        }}
                     >
                         SHOWING MOVIES
                     </button>
                     <button
                         type="button"
-                        className={`${buttonActive.activeButtonComing} text-xl text-white border-white border-2 px-8 py-3 font-semibold rounded-full hover:bg-orange-main`}
-                        // onClick={() => {
-                        //     const action = {
-                        //         type: GET_MOVIES_COMING,
-                        //     }
-                        //     dispatch(action)
-                        // }}
+                        className={`${buttonActive.coming} text-xl text-white border-white border-2 px-8 py-3 font-semibold rounded-full hover:bg-orange-main`}
+                        onClick={() => {
+                            getMoviesByType("coming");
+                            setShow(false);
+                        }}
                     >
                         COMING MOVIES
                     </button>
@@ -46,4 +43,4 @@ const HomeMenu = (props) => {
     );
 };
 
-export default HomeMenu;
+export default memo(HomeMenu);
